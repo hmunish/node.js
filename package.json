@@ -1,0 +1,15 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "Repository to learn node.js",
+  "main": "script.js",
+  "scripts": {
+    "start": "nodemon script.js",
+    "start-server": "node script.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
