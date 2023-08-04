@@ -2,26 +2,11 @@ const path = require("path");
 const fs = require("fs");
 const express = require("express");
 const router = express.Router();
+const rootDir = require("../util/path");
 
 router.get("/login", (req, res) => {
-  function addUsernameToLocalStorage(e) {
-    e.preventDefault();
-    localStorage.setItem("username", e.target.username.value);
-    e.submit();
-  }
   res.setHeader("Content-Type", "text/html");
-  res.send(
-    `
-    <form action="/chat/messenger"  method="GET"><input name="username" placeholder="Username"><button type="submit">Send</button></form>
-    <script>
-    document.querySelector('form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        localStorage.setItem("username", e.target.username.value);
-        e.target.submit();
-    })
-</script>
-    `
-  );
+  res.sendFile(path.join(rootDir, "views", "login.html"));
 });
 
 router.get("/messenger", (req, res, next) => {
@@ -31,8 +16,7 @@ router.get("/messenger", (req, res, next) => {
     `<p>${message}</p> <form action="/chat/record" method="POST"><input name="message" placeholder="Message"><input type="text" hidden value="" name="username"><button type="submit">Send</button></form>
     <script>
         document.querySelector('input[name ="username"]').value = localStorage.getItem('username');
-    </script>
-    `
+    </script>`
   );
 });
 
